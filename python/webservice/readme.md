@@ -23,7 +23,7 @@ Google provides a Webservice to autocomplete the Google Search. It's one of a fe
 
 **Use Case**
 
-![Google Autocomplete ](google-autocomplete.png){:width="250px"}
+![Google Autocomplete ](google-autocomplete.png)
 
 
 **Script**
