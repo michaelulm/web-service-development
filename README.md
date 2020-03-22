@@ -23,7 +23,7 @@ Bachelor program **IT DUAL**:
 
 **Course Modules:**
 
-- Web Service Introduction
+- [Web Service Introduction](tree/master/python/webservice)
 - Webservers
 - ReST Services
 - WebSocket
