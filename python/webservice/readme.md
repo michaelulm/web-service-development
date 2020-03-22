@@ -23,7 +23,9 @@ Google provides a Webservice to autocomplete the Google Search. It's one of a fe
 
 **Use Case**
 
-![Google Autocomplete ](google-autocomplete.png)
+Google uses this Web Service for asynchron loading the auto complete suggestions
+
+![Google Autocomplete ](google-autocomplete.PNG)
 
 
 **Script**
