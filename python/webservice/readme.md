@@ -23,7 +23,7 @@ Google provides a Webservice to autocomplete the Google Search. It's one of a fe
 
 **Use Case**
 
-![Google Autocomplete ](google-autocomplete.png =250x)
+![Google Autocomplete ](google-autocomplete.png | width=250)
 
 
 **Script**
@@ -37,7 +37,7 @@ Google provides a Webservice to autocomplete the Google Search. It's one of a fe
 - Try to transfer this simple Webservice call to other programming languages like Java, C#, ...
 
 
-###Additional and recommended References###
+### Additional and recommended References
 
 **How to use python requests modul?**
 
