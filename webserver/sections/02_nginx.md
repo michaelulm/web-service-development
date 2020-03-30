@@ -266,7 +266,7 @@ server {
   # ...
 
   location /msd {
-    return 301 https://www.fh-joanneum.at/msd
+    return 302 https://www.fh-joanneum.at/msd;
   }
 
   # ...
@@ -276,7 +276,7 @@ server {
 > **What is the meaning of the rows?**
 > 
 > ```nginx
-> return 302 https://www.fh-joanneum.at/msd
+> return 302 https://www.fh-joanneum.at/msd;
 > ```
 > The `location` directive you already know from the [error example](#location). With `return`, we can return a custom HTTP status code, in this example [*302* (Found)](https://en.wikipedia.org/wiki/HTTP_302) and the redirect to an external url.
 
