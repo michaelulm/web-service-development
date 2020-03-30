@@ -149,6 +149,8 @@ node /srv/node/index.js
 If you want to run the nodejs application in background, simple add a `&` at the end. If you want to stop it, call `kill <pid>` (with the returned *pid* after the start) or simple `killall node` (*! attention, if several nodejs applications are running on the system, they will be **all** terminated!*)
 
 
+![api](img/api.png)
+
 ***
 
 * [README](../README.md)
