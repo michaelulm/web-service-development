@@ -1,0 +1,18 @@
+{
+  "name": "REST-Example-Web-Service",
+  "version": "1.0.0",
+  "description": "Education Example for REST Web Service",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Michael Ulm",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "jquery": "^3.5.0",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "sqlite3": "^4.1.1"
+  }
+}

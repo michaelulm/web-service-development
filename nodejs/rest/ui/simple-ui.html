@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple UI</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <style>
+        input, textarea{
+            width:200px;
+            display:block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Hello World of Notes and REST Web Services!</h1>
+<p id="demo"></p>
+<ul id="results"></ul>
+
+<form id="noteForm" name="noteForm">
+
+    <input type="text" id="title" name="title" placeholder="Title" /><br/>
+    <textarea id="description" name="description" placeholder="Description" ></textarea><br/>
+    <input type="hidden" id="id" name="id" value="0"/>
+
+    <input type="button" id="clearButton" name="clearButton" value="Clear" />
+    <input type="button" id="saveButton" name="saveButton" value="Save" />
+    <input type="button" id="readLatestButton" name="readLatestButton" value="Read Latest" />
+    <input type="button" id="readAllButton" name="readAllButton" value="Read All" />
+</form>
+
+<script>
+
+    var latestID = 0;
+
+    $( document ).ready(function() {
+        // just for debug purpose and testing JQuery is running
+        $("#demo").text("Test your REST Web Service!");
+        $("#readLatestButton").attr("disabled", "disabled");
+
+        // Event Handler for click Event of one Note Item, where User will use mouse-click to select a specific item
+        function readOne() {
+            // just output for debug purpose for testing data attributes, to store more information in each HTML item
+            console.log(this);
+            console.log($(this).data("note-id"));
+
+            // read current information directly from HTML list
+            $("#id").val($(this).data("note-id"));
+            $("#title").val($(this).data("note-title"));
+            $("#description").val($(this).data("note-description"));
+        };
+
+        $( "#clearButton" ).click(function() {
+            $("#id").val("0");
+            $("#title").val("");
+            $("#description").val("");
+        });
+
+        // simple binds send button click function for triggering different REST Operations
+        $( "#saveButton" ).click(function() {
+
+            var noteId = $("#id").val();
+            if(noteId == 0) {
+                $.ajax({
+                    type: 'post',
+                    url: 'http://localhost:8080/notes/',
+                    data: {title: $("#title").val(), description: $("#description").val()},
+                    dataType: "html",
+                    xhrFields: {
+                        withCredentials: false
+                    },
+                    headers: {},
+                    success: function (data) {
+                        console.log("Successfully saved new Note");
+                        console.log(data);
+                        console.log(JSON.parse(data).id);
+                        $("#id").val(JSON.parse(data).id);
+                    },
+                    error: function () {
+                        console.log('Sorry...');
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: 'put',
+                    url: 'http://localhost:8080/notes/' + noteId,
+                    data: {id: $("#id").val(), title: $("#title").val(), description: $("#description").val()},
+                    dataType: "html",
+                    xhrFields: {
+                        withCredentials: false
+                    },
+                    headers: {},
+                    success: function (data) {
+                        console.log("Successfully updated existing Note");
+                        console.log(data);
+                    },
+                    error: function () {
+                        console.log('Sorry...');
+                    }
+                });
+            }
+        });
+
+        // reads all notes from REST Web Service and creates a simple UI to interact with current Notes
+        $( "#readAllButton" ).click(function() {
+            $.get( "http://localhost:8080/notes", function( data ) {
+
+                // cleanup current list
+                $(".note").remove();
+
+                // create list in UI
+                console.log(data.notes);
+                data.notes.forEach(function(note)
+                {
+                    console.log(note);
+                    $("#results").append('<li class="note" data-note-id="'+note.id+'" data-note-title="'+note.title+'" data-note-description="'+note.description+'">Note '+note.id+': ' + note.title + ' </li>');
+
+                    if(latestID < note.id)
+                        latestID = note.id;
+
+
+                    $("#readLatestButton").removeAttr("disabled");
+                });
+
+                // add click event to all notes
+                $(".note").on('click', readOne);
+            });
+            console.log( "Read all" );
+        });
+
+        // requests single note data from REST Web Service
+        $( "#readLatestButton" ).click(function() {
+            $.get("http://localhost:8080/notes/" + latestID, function (data) {
+
+                console.log( "Read latest ID " + latestID );
+                console.log(data);
+
+                $("#id").val(data.id);
+                $("#title").val(data.title);
+                $("#description").val(data.description);
+            });
+        });
+
+    });
+</script>
+
+
+</body>
+</html>
