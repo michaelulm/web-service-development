@@ -4,3 +4,4 @@
 target
 node_modules
 package-lock.json
+/nodejs/rest/notes.db

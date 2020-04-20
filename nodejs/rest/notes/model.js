@@ -62,7 +62,7 @@ function insert(note) {
 }
 
 // update an existing note
-function update(note, userId) {
+function update(note) {
   return new Promise((resolve, reject) => {
     const query =
       'UPDATE notes SET title = ?, description = ? WHERE id = ?';
@@ -84,8 +84,8 @@ function update(note, userId) {
 function remove(id) {
   return new Promise((resolve) => {
     const query =
-      'DELETE FROM notes WHERE id = ? AND (user = ? OR public = 1)';
-    db.run(query, [id, userId], (error, results) => {
+      'DELETE FROM notes WHERE id = ? ';
+    db.run(query, [id], (error, results) => {
       if (error) {
         reject(error);
       } else {
@@ -101,7 +101,7 @@ module.exports = {
     return getOne(id);
   },
   delete(id) {
-    return remove(id, userId);
+    return remove(id);
   },
   save(note) {
     if (!note.id) {

@@ -25,7 +25,8 @@
 
     <input type="button" id="clearButton" name="clearButton" value="Clear" />
     <input type="button" id="saveButton" name="saveButton" value="Save" />
-    <input type="button" id="readLatestButton" name="readLatestButton" value="Read Latest" />
+    <input type="button" id="deleteButton" name="deleteButton" value="Delete from Server" />
+    <input type="button" id="readLatestButton" name="readLatestButton" value="Read Latest from Server" />
     <input type="button" id="readAllButton" name="readAllButton" value="Read All" />
 </form>
 
@@ -37,6 +38,7 @@
         // just for debug purpose and testing JQuery is running
         $("#demo").text("Test your REST Web Service!");
         $("#readLatestButton").attr("disabled", "disabled");
+        $("#deleteButton").attr("disabled", "disabled");
 
         // Event Handler for click Event of one Note Item, where User will use mouse-click to select a specific item
         function readOne() {
@@ -48,12 +50,14 @@
             $("#id").val($(this).data("note-id"));
             $("#title").val($(this).data("note-title"));
             $("#description").val($(this).data("note-description"));
+            $("#deleteButton").removeAttr("disabled");
         };
 
         $( "#clearButton" ).click(function() {
             $("#id").val("0");
             $("#title").val("");
             $("#description").val("");
+            $("#deleteButton").attr("disabled", "disabled");
         });
 
         // simple binds send button click function for triggering different REST Operations
@@ -138,6 +142,43 @@
                 $("#id").val(data.id);
                 $("#title").val(data.title);
                 $("#description").val(data.description);
+            });
+        });
+
+        // requests single note data from REST Web Service
+        $( "#readLatestButton" ).click(function() {
+            $.get("http://localhost:8080/notes/" + latestID, function (data) {
+
+                console.log( "Read latest ID " + latestID );
+                console.log(data);
+
+                $("#id").val(data.id);
+                $("#title").val(data.title);
+                $("#description").val(data.description);
+            });
+        });
+
+        // requests delete operation from REST API
+        $( "#deleteButton" ).click(function() {
+
+            var noteId = $("#id").val();
+            console.log("send delete Request to REST with note " + noteId );
+            $.ajax({
+                type: 'delete',
+                url: 'http://localhost:8080/notes/' + noteId,
+                data: {},
+                dataType: "html",
+                xhrFields: {
+                    withCredentials: false
+                },
+                headers: {},
+                success: function (data) {
+                    console.log("Successfully deleted existing Note");
+                    console.log(data);
+                },
+                error: function () {
+                    console.log('Sorry...');
+                }
             });
         });
 
