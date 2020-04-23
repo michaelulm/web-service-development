@@ -7,12 +7,13 @@ First, checkout this example repo. Make sure you have a working Node-Environment
 * [`npm`](https://www.npmjs.com/) or [`yarn`](https://classic.yarnpkg.com/en/)
 
 ```console
-$ git clone <REPO-URL>
+$ git clone https://github.com/michaelulm/web-service-development
+$ cd web-service-development/testing/1.jest/
 $ npm install
 ```
 
 ### Add jest to the Project.
-Before you can execute the tests, you need to add JEST to the Project. For that, add the JEST-Module via `npm`/`yarn` as Development dependency.
+Before you can execute the tests, you need to add JEST to the Project. For that, add the JEST-Module via `npm`/`yarn` as development dependency.
 ```console
 $ npm i -D jest
 ```
