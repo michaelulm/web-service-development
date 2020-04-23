@@ -6,15 +6,23 @@ describe("end2end testing", () => {
 
   beforeEach(() => {
     request = supertest(app);
-});
+  });
 
-  it("should return 3 notes on getAll", async () => {
+  it("should return 3 notes on GET", async () => {
     const response = await request.get("/notes");
     const json = JSON.parse(response.text);
 
     expect(response.status).toBe(200);
     expect(response.headers["content-type"]).toMatch(/json/);
     expect(json.notes.length).toBe(3);
+  });
+
+  it("should add a new entry on valid POST", async () => {
+    const response = await request
+                              .post("/notes")
+                              .send({ title: "testing", description: "automation testing" });
+    
+    fail("implement me...");
   });
 });
 

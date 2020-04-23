@@ -57,3 +57,18 @@ When you execute `request.METHOD` (`.get`, `.post`, ...), you should get a respo
     '{"notes":[{"id":1,"title":"my first note","description":"this is my first note"},{"id":2,"title":"learn testing","description":"learn how to test REST-APIs"},{"id":3,"title":"buy coffee","description":"need more coffee to code well"}]}',
 }
 ```
+
+With the `request` object, you can not just execute the HTTP-methods, you can also set individual headers or send a custom body.
+```javascript
+// ...
+
+  request.post("/path")
+         .send({ message: "some text" })      // with `send` you can send a custom body to the 'server' (like JSON, URL-encoded etc.)
+         .set('Accept', 'application/json');  // with `set` you can set custom request headers
+// ...
+```
+
+For more information, take a look on the [supertest docu](https://www.npmjs.com/package/supertest).
+
+> supertest brings it's own possibility to assert the response. you can chain multiple `.expect()` calls (like `.then()` in a promise chain) and inside that, you can do the assertions.  
+
