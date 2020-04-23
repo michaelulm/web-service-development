@@ -1,0 +1,38 @@
+{
+  "name": "rest-testing",
+  "version": "1.0.0",
+  "description": "Test a express-ReST-app with Jest",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --silent",
+    "test:watch": "jest --silent --watch",
+    "test:coverage": "jest --silent --coverage",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelulm/web-service-development.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "express",
+    "jest",
+    "unit-testing",
+    "rest"
+  ],
+  "author": "Harald Schwab, FH JOANNEUM GmbH <harald.schwab2@fh-joanneum.at>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelulm/web-service-development/issues"
+  },
+  "homepage": "https://github.com/michaelulm/web-service-development#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^25.4.0",
+    "supertest": "^4.0.2"
+  }
+}
