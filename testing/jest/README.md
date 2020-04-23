@@ -8,7 +8,7 @@ First, checkout this example repo. Make sure you have a working Node-Environment
 
 ```console
 $ git clone https://github.com/michaelulm/web-service-development
-$ cd web-service-development/testing/1.jest/
+$ cd web-service-development/testing/jest/
 $ npm install
 ```
 
