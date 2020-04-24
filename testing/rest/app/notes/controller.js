@@ -45,7 +45,7 @@ function createAction(request, response) {
 function updateAction(request, response) {
   console.log('update');
   const note = {
-    id: request.params.id,
+    id: +request.params.id,
     title: request.body.title,
     description: request.body.description,
   };

@@ -9,11 +9,11 @@ const newId = (array) => {
 };
 
 const isNewNote = (note) => {
-  return note.hasOwnProperty("title") && note.hasOwnProperty("description");
+  return note.title && note.description;
 };
 
 const isNote = (note) => {
-  return isNewNote(note) && note.hasOwnProperty("id");
+  return isNewNote(note) && note.id;
 };
 
 const getAll = async () => {
