@@ -1,6 +1,6 @@
-# REST testing
+# REST testing with JEST and SuperTest
 
-In this exercise, we will test our REST-Service.  
+In this exercise, we will test our REST-Service code-based.  
 The service is more or less the same as from the initial [REST exercise](../../nodejs/rest/).
 
 We just have removed the SQLite Database and add instead a simple "in memory" replacement.
