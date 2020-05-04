@@ -145,6 +145,8 @@ Here, you will find some tests for our [notes API](../rest/). When you take a de
 ### write own tests
 These existing tests should serve as an introduction to the Postman test API. Take a closer look at them, including what happens in **Pre-request Script** and **Body**. Try to extend them and create your own tests.
 
+> That you always run the tests with the same base, don't forget to restart the [notes API](../rest/) server before you run the tests!
+
 - [x] learn tests with postman
 - [ ] adapt existing tests
 - [ ] create your own tests, e.g.
