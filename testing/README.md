@@ -4,9 +4,9 @@ learn how to test ReST-APIs/Webservices
 
 for that, you will find here a short introduction into the [Jest testing framework](jest/).
 
-and a continuing exercise for testing ReST-APIs with [Jest and SuperTest](rest/).
+and a continuing exercise for testing ReST APIs with [Jest and SuperTest](rest/).
 
-furthermore we show you how to test ReST APIs using [Postman](postman/) *coming soon*
+furthermore we show you how to test ReST APIs using [Postman](postman/)
 
 
 ## References
