@@ -155,6 +155,12 @@ These existing tests should serve as an introduction to the Postman test API. Ta
   - [ ] ...
 
 
+## More Postman tutorials
+If you now want to learn more about Postman, take a look into their own tutorials (inside the [**Launchpad**](https://support.getpostman.com/hc/en-us/articles/360036235294-What-is-Launchpad-))
+
+![more postman tutorials](img/more_postman_tutorials.png)
+
+
 ## References
 * [Postman](https://learning.postman.com/)
 * [Learn Postman](https://learning.postman.com/docs/postman/scripts/test-scripts/)
