@@ -22,17 +22,17 @@
 							"pm.test(\"GET return data\", () => {",
 							"    const jsonData = pm.response.json();",
 							"    pm.expect(jsonData.notes.length).to.eql(3);",
-							"    ",
+							"",
 							"    const first = jsonData.notes[0];",
 							"    pm.expect(first.id).to.eql(1);",
 							"    pm.expect(first.title).to.eql(\"my first note\");",
 							"    pm.expect(first.description).to.eql(\"this is my first note\");",
-							"  ",
+							"",
 							"    const second = jsonData.notes[1];",
 							"    pm.expect(second.id).to.eql(2);",
 							"    pm.expect(second.title).to.eql(\"learn testing\");",
 							"    pm.expect(second.description).to.eql(\"learn how to test REST-APIs\");",
-							"    ",
+							"",
 							"    const third = jsonData.notes[2];",
 							"    pm.expect(third.id).to.eql(3);",
 							"    pm.expect(third.title).to.eql(\"buy coffee\");",
@@ -65,20 +65,9 @@
 			"name": "POST new /notes",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"id": "162dc6b7-059f-4497-b41c-ea09ff44f789",
-						"exec": [
-							"pm.environment.set(\"POST-title\", \"test\");",
-							"pm.environment.set(\"POST-description\", \"test note\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
 					"listen": "test",
 					"script": {
-						"id": "879df1fe-edff-4a66-8940-36c0dae52b8a",
+						"id": "36bc11a7-d53b-4430-85fa-f0652af6a7b8",
 						"exec": [
 							"pm.test(\"Successful POST request\", () => {",
 							"    pm.response.to.have.status(201);",
@@ -87,10 +76,21 @@
 							"",
 							"pm.test(\"POST return data\", () => {",
 							"    const jsonData = pm.response.json();",
-							"    ",
+							"",
 							"    pm.expect(jsonData.id).to.be.above(3);",
-							"    pm.environment.set(\"LATEST\", jsonData.id);",
+							"    pm.collectionVariables.set(\"LATEST\", jsonData.id);",
 							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5264e622-ab68-4bb5-91a8-b892c11d45b2",
+						"exec": [
+							"pm.collectionVariables.set(\"POST-title\", \"test\");",
+							"pm.collectionVariables.set(\"POST-description\", \"test note\");"
 						],
 						"type": "text/javascript"
 					}
@@ -129,7 +129,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "efc23fee-30a2-4a88-bbd3-081aeb809dea",
+						"id": "ee236d5e-a26a-409b-ad6a-1b40852e8e54",
 						"exec": [
 							"pm.test(\"Successful GET request\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -139,9 +139,9 @@
 							"pm.test(\"GET return data\", () => {",
 							"    const jsonData = pm.response.json();",
 							"",
-							"    pm.expect(jsonData.id).to.eql(pm.environment.get(\"LATEST\"));",
-							"    pm.expect(jsonData.title).to.eql(pm.environment.get(\"POST-title\"));",
-							"    pm.expect(jsonData.description).to.eql(pm.environment.get(\"POST-description\"));",
+							"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"LATEST\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.collectionVariables.get(\"POST-title\"));",
+							"    pm.expect(jsonData.description).to.eql(pm.collectionVariables.get(\"POST-description\"));",
 							"});"
 						],
 						"type": "text/javascript"
@@ -171,20 +171,9 @@
 			"name": "PUT /notes/{LATEST}",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"id": "09ba5cf4-d4cd-4a91-8339-bf2996dcbe11",
-						"exec": [
-							"pm.environment.set(\"PUT-title\", \"test\");",
-							"pm.environment.set(\"PUT-description\", \"update test note\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
 					"listen": "test",
 					"script": {
-						"id": "f3aa9500-6cc2-420d-af2a-e94c355e7a25",
+						"id": "05e6e639-4106-4654-b9b0-5b499ba8a949",
 						"exec": [
 							"pm.test(\"Successful PUT request\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -193,11 +182,22 @@
 							"",
 							"pm.test(\"POST return data\", () => {",
 							"    const jsonData = pm.response.json();",
-							"    ",
-							"    pm.expect(jsonData.id).to.eql(pm.environment.get(\"LATEST\"));",
-							"    pm.expect(jsonData.title).to.eql(pm.environment.get(\"PUT-title\"));",
-							"    pm.expect(jsonData.description).to.eql(pm.environment.get(\"PUT-description\"));",
+							"",
+							"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"LATEST\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.collectionVariables.get(\"PUT-title\"));",
+							"    pm.expect(jsonData.description).to.eql(pm.collectionVariables.get(\"PUT-description\"));",
 							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9b8f596d-2536-41ea-9255-a9417ee2f19e",
+						"exec": [
+							"pm.collectionVariables.set(\"PUT-title\", \"test\");",
+							"pm.collectionVariables.set(\"PUT-description\", \"update test note\");"
 						],
 						"type": "text/javascript"
 					}
@@ -382,13 +382,13 @@
 	],
 	"variable": [
 		{
-			"id": "6b6b29a1-1b13-4d4b-8887-b2cf9bdb75d6",
+			"id": "61d003f0-a565-4de7-ba26-e1dd3d3f819b",
 			"key": "host",
 			"value": "localhost",
 			"type": "string"
 		},
 		{
-			"id": "1e8d775a-8e0a-43b9-92b2-3c5cd5972cd2",
+			"id": "717bc915-120a-4d37-81c5-195a845523d3",
 			"key": "port",
 			"value": "8080",
 			"type": "string"

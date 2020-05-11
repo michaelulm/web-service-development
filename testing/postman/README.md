@@ -11,7 +11,7 @@ $ npm start
 ## Prerequisites
 In this exercise, we will use [Postman](https://www.postman.com/) to test our ReST API. So at first, please install (the latest version of) [Postman](https://www.postman.com/downloads/) on your system. Please do **not** use the Browser Plugin, because it is **deprecated**!
 
-On the first start, you will be asked to register/login. You can skip this with *Skip signing in and take me straight to the app* on the bottom
+On the first start, you will be asked to register/login. You can skip this with *Skip signing in and take me straight to the app* on the bottom.  
 ![postman first start](img/postman_login.png)
 
 > The registration is free and offers you some advantages, e.g. share your history and settings through multiple installation. it would be also necessary if you want to work collaborative with postman. but for this exercise/tutorial, it wouldn't be needed.
@@ -19,7 +19,7 @@ On the first start, you will be asked to register/login. You can skip this with 
 To run the service, you also need [NodeJS](https://nodejs.org/en/) (I will recommend the LTS Version!) and [`npm`](https://www.npmjs.com/) or [`yarn`](https://classic.yarnpkg.com/en/).
 
 ## Postman application
-Postman comes with many features. For this first introduction, we will focus on the Request pane an in there on some sub areas.
+Postman comes with many features. For this first introduction, we will focus on the Request pane an in there on some sub areas.  
 ![postman window](img/postman.png)
 
 Like in a browser, you can open multiple Request tabs. On the top, you can select the wanted **HTTP Method** and enter the URL, which you will request. All send requests would be saved inside the **History** on the left side.
@@ -39,7 +39,7 @@ Before we start with (automatically evaluated) tests, familiarize yourself with 
 Use the known implemented endpoints and make some requests with the different HTTP-methods.
 
 ### GET
-The simplest one will be a GET-Request. Like if you're surfing with your browser, add the URI to the `/notes` resources and **Send** the request. If everything works fine, you will get a response with the 3 pre-defined notes.
+The simplest one will be a GET-Request. Like if you're surfing with your browser, add the URI to the `/notes` resources and **Send** the request. If everything works fine, you will get a response with the 3 pre-defined notes.  
 ![postman GET](img/postman_get.png).
 
 Try also to get a specific **note**. What happens, when you try to get a note that doesn't exists?
@@ -50,7 +50,7 @@ Try also to get a specific **note**. What happens, when you try to get a note th
 
 ### POST
 For a POST, you have first to switch the HTTP-Method left to the URL.  
-When we send a POST-Request, we typically need to send a Request-Body to our service. To add that, switch on the Request-Area to the *Body* tab and enter **raw** data. On the dropdown on the right, you can switch to a specific data type (e.g. JSON), which will bring you some syntax highlighting, additionally the appropriate content-type header is added to the request.
+When we send a POST-Request, we typically need to send a Request-Body to our service. To add that, switch on the Request-Area to the *Body* tab and enter **raw** data. On the dropdown on the right, you can switch to a specific data type (e.g. JSON), which will bring you some syntax highlighting, additionally the appropriate content-type header is added to the request.  
 ![postman POST](img/postman_post.png)
 
 - [x] POST new data
@@ -139,8 +139,18 @@ Download the [file](./webservice-dev-test.postman_collection.json) and import it
 ![import collection](img/postman_import_collection03.png)
 
 Here, you will find some tests for our [notes API](../rest/). When you take a deeper look in them, you will see that they are partially interdependent. Therefore, the order is not arbitrary. For example, the second test of **POST new /notes** not only checks the response, but also sets a variable that is accessed by the following tests.
+In this case, we're setting a `collectionVariable`. If you want to know more about variables in Postman, take a look [here](https://learning.postman.com/docs/postman/scripts/postman-sandbox-api-reference/#pmvariables).
 
 ![test sets variable](img/postman_set_variable_for_further_tests.png)
+
+To run the collection, switch to the extended view of the collection and click **Run**.
+
+![run collection](img/postman_run_collection01.png)
+
+Inside the new window, you can run all tests in a row.
+
+![run collection](img/postman_run_collection02.png)
+
 
 ### write own tests
 These existing tests should serve as an introduction to the Postman test API. Take a closer look at them, including what happens in **Pre-request Script** and **Body**. Try to extend them and create your own tests.
