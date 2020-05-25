@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "cf4039fd-947b-4c72-92dd-64addbbab544",
+		"name": "webservice-dev-test",
+		"description": "Testing Notes-API (https://github.com/michaelulm/web-service-development/tree/master/testing/rest)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET (initial) /notes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "659a6389-4688-4fb1-8e3e-daa81393e5ab",
+						"exec": [
+							"pm.test(\"Successful GET request\", () => {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"GET return data\", () => {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.notes.length).to.eql(3);",
+							"",
+							"    const first = jsonData.notes[0];",
+							"    pm.expect(first.id).to.eql(1);",
+							"    pm.expect(first.title).to.eql(\"my first note\");",
+							"    pm.expect(first.description).to.eql(\"this is my first note\");",
+							"",
+							"    const second = jsonData.notes[1];",
+							"    pm.expect(second.id).to.eql(2);",
+							"    pm.expect(second.title).to.eql(\"learn testing\");",
+							"    pm.expect(second.description).to.eql(\"learn how to test REST-APIs\");",
+							"",
+							"    const third = jsonData.notes[2];",
+							"    pm.expect(third.id).to.eql(3);",
+							"    pm.expect(third.title).to.eql(\"buy coffee\");",
+							"    pm.expect(third.description).to.eql(\"need more coffee to code well\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes"
+					]
+				},
+				"description": "GET the list of initialiced notes"
+			},
+			"response": []
+		},
+		{
+			"name": "POST new /notes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36bc11a7-d53b-4430-85fa-f0652af6a7b8",
+						"exec": [
+							"pm.test(\"Successful POST request\", () => {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"POST return data\", () => {",
+							"    const jsonData = pm.response.json();",
+							"",
+							"    pm.expect(jsonData.id).to.be.above(3);",
+							"    pm.collectionVariables.set(\"LATEST\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5264e622-ab68-4bb5-91a8-b892c11d45b2",
+						"exec": [
+							"pm.collectionVariables.set(\"POST-title\", \"test\");",
+							"pm.collectionVariables.set(\"POST-description\", \"test note\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"{{POST-title}}\",\n\t\"description\": \"{{POST-description}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes"
+					]
+				},
+				"description": "Add a new note with POST request"
+			},
+			"response": []
+		},
+		{
+			"name": "GET added /notes/{LATEST}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee236d5e-a26a-409b-ad6a-1b40852e8e54",
+						"exec": [
+							"pm.test(\"Successful GET request\", () => {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"GET return data\", () => {",
+							"    const jsonData = pm.response.json();",
+							"",
+							"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"LATEST\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.collectionVariables.get(\"POST-title\"));",
+							"    pm.expect(jsonData.description).to.eql(pm.collectionVariables.get(\"POST-description\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes/{{LATEST}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes",
+						"{{LATEST}}"
+					]
+				},
+				"description": "Get the full note that you added with \"POST new /notes\""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /notes/{LATEST}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05e6e639-4106-4654-b9b0-5b499ba8a949",
+						"exec": [
+							"pm.test(\"Successful PUT request\", () => {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"POST return data\", () => {",
+							"    const jsonData = pm.response.json();",
+							"",
+							"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"LATEST\"));",
+							"    pm.expect(jsonData.title).to.eql(pm.collectionVariables.get(\"PUT-title\"));",
+							"    pm.expect(jsonData.description).to.eql(pm.collectionVariables.get(\"PUT-description\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9b8f596d-2536-41ea-9255-a9417ee2f19e",
+						"exec": [
+							"pm.collectionVariables.set(\"PUT-title\", \"test\");",
+							"pm.collectionVariables.set(\"PUT-description\", \"update test note\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"{{PUT-title}}\",\n\t\"description\": \"{{PUT-description}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes/{{LATEST}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes",
+						"{{LATEST}}"
+					]
+				},
+				"description": "update the latest added note"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /notes/{LATEST}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "947ad688-781d-4168-8722-f4a11c223649",
+						"exec": [
+							"pm.test(\"Successful DELETE request\", () => {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes/{{LATEST}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes",
+						"{{LATEST}}"
+					]
+				},
+				"description": "delete the latest added note"
+			},
+			"response": []
+		},
+		{
+			"name": "POST invalid data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c27b2c21-0611-450e-90f3-ad359af07942",
+						"exec": [
+							"pm.test(\"Unsuccessful POST request\", () => {",
+							"    pm.response.to.have.status(500);",
+							"});",
+							"",
+							"pm.test(\"POST return data\", () => {",
+							"    const text = pm.response.text();",
+							"    ",
+							"    pm.expect(text).to.eql('\"invalid note\"');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"invalid\": \"data\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes"
+					]
+				},
+				"description": "POST some invalid data"
+			},
+			"response": []
+		},
+		{
+			"name": "GET invalid ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0d8a4b2-3b1e-4e11-812f-b1fd7a22630d",
+						"exec": [
+							"pm.test(\"Unsuccessful GET request\", () => {",
+							"    pm.response.to.have.status(500);",
+							"});",
+							"",
+							"pm.test(\"GET return data\", () => {",
+							"    const text = pm.response.text();",
+							"    ",
+							"    pm.expect(text).to.eql('\"could nothing find with id 999999\"');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/notes/999999",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"notes",
+						"999999"
+					]
+				},
+				"description": "try GET request for invalid ID"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b71e670e-be6b-4c56-9058-54d5bb26acde",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5728ee3f-0c99-4a28-9689-b7374503c9e7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "61d003f0-a565-4de7-ba26-e1dd3d3f819b",
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"id": "717bc915-120a-4d37-81c5-195a845523d3",
+			"key": "port",
+			"value": "8080",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

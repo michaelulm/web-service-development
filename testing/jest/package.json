@@ -1,0 +1,19 @@
+{
+  "name": "jest-testing",
+  "version": "1.0.0",
+  "description": "Your first steps in JavaScript/Node UNIT testing with JEST",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [
+    "javascript",
+    "testing",
+    "jest",
+    "unittest",
+    "test-automation",
+    "node"
+  ],
+  "author": "Harald Schwab, FH JOANNEUM GmbH <harald.schwab2@fh-joanneum.at>",
+  "license": "ISC"
+}
