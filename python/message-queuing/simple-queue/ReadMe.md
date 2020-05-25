@@ -20,4 +20,5 @@ with the concept of RabbitMQ as a Messge Broker you are able to receive any mess
 
 ## Receive with Consumer ##
 also called Worker in some cases
+
 ![](https://www.rabbitmq.com/img/tutorials/receiving.png)
