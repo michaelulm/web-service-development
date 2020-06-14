@@ -8,6 +8,13 @@ Try to answer following questions:
 - Which benefits exist if you are using such Tokens for User Authentication?
 - What are possible risks if you are not using Authentication and Autorization with e.g. Tokens? 
 
+## useful Links
+
+- testing with environment variables https://blog.postman.com/extracting-data-from-responses-and-chaining-requests/ e.g. request token and using at another request
+- What is a Bearer Token 
+	- https://oauth.net/2/bearer-tokens/
+	- https://swagger.io/docs/specification/authentication/bearer-authentication/
+
 
 ## JSON Web Tokens
 
@@ -29,6 +36,11 @@ Those steps should guide you through implementing JSON Web Tokens.
 - https://www.youtube.com/watch?v=7nafaH9SddU
 - https://gist.github.com/jfromaniello/8418116
 - https://developer.mozilla.org/de/docs/Web/API/Window/localStorage
+- **Postman Requests** https://www.getpostman.com/collections/eb0f211d22e26b550bc1
+
+### Node.js with JWT and Web Socket Example
+- [app.js](app.js) node express Server with simple demonstration (with Mock objects) incl. 
+- [ui/frontend.js](ui/frontend.js) simple UI implementation based on Web Socket Example
 
 ## OAuth2
 
