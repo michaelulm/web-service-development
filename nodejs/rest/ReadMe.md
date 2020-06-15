@@ -32,3 +32,7 @@ depending on the REST example of notes management, we will take a quick look at 
 ## References
 
 Node.js - Das umfassende Handbuch
+
+### useful links
+
+- CORS [Plugin Firefox](https://addons.mozilla.org/de/firefox/addon/cors-everywhere/) for enable / disable CORS in your browser 
